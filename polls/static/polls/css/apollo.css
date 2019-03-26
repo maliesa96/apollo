@@ -1,0 +1,569 @@
+@font-face {
+    font-family: gtwalsh;
+    src: url(/static/polls/fonts/GT-Walsheim-Regular.ttf);
+}
+html {
+  /* body will set it's height based on its parent, which is html */
+  height: 100%;
+
+  /* set full width as well */
+  width: 100%;
+}
+body {
+    font-family: gtwalsh;
+    --myblue: #0D849F;
+    --mydarkgrey: #D8D8D8;
+    --myteal: #1fc8a4;
+    --mymuted: #BAB9B9;
+    color: #605B5B;
+
+      /* needed to prevent unwanted scroll-bars */
+    margin: 0;
+    padding: 0;
+}
+
+.active {
+    color: var(--myblue);
+}
+.muted{
+    color: var(--mymuted);
+}
+.navbar-nav {
+    align-items: center;
+}
+
+.backdrop {
+    background-color: #f5f5f5;
+    display: inline-block;
+    width: 170px;
+    height: 77vh;
+}
+
+.participant {
+    background-color: var(--mydarkgrey);
+    margin-bottom: 10px;
+    border-radius: 1rem;
+}
+
+.nav-link:hover {
+    color: var(--myblue) !important;
+}
+.chart-button {
+    float: right;
+    border-radius: 1rem;
+    border-style: solid;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 7px;
+    border-width: 2px;
+    border-color: #605B5B;
+    background-color: transparent;
+}
+.chart-button:hover {
+    cursor: pointer;
+    color: var(--myblue);
+    border-color: var(--myblue);
+}
+
+
+.chart-icon {
+    cursor: pointer;
+     margin-top: 10px;
+     margin-bottom: 10px;
+     margin-left: 10px;
+     margin-right: 5px;
+    font-size: 25px;
+}
+.newpoll {
+    max-width: 500px;
+    height: 40px;
+    padding-right: 65px;
+    border-radius: 2rem;
+}
+.zoom {
+    transition: transform .2s; /* Animation */
+    color: inherit;
+}
+.zoom:hover{
+    -ms-transform: scale(1.1); /* IE 9 */
+    -webkit-transform: scale(1.1); /* Safari 3-8 */
+    transform: scale(1.1);
+    color: inherit; /* prevents coloring due to href */
+    text-decoration: none; /* prevents underline due to href */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.btn.focus {
+    box-shadow: None;
+
+}
+.btn.active > img {
+    box-shadow: 0 0 1px 3px var(--myblue);
+}
+
+.newpoll::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #9F9F9F;
+}
+.newpoll:-ms-input-placeholder { /* IE 10-11, Edge */
+    color: #9F9F9F;
+}
+
+.chart-icon:hover {
+    color: var(--myblue);
+}
+
+.chart-icon.click-disabled:hover {
+    color: #605B5B;
+}
+
+.form-control:focus {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 8px 0 rgba(0, 0, 0, 0.19);
+    border-color: #ced4da;
+
+}
+.form-control.option {
+    margin: 10px;
+
+}
+
+.btn.primary {
+    background-color: var(--myblue);
+    color: white;
+    border-radius: 1rem;
+}
+
+#gobutton {
+    color: #605B5B;
+    background-color: var(--mydarkgrey);
+    border-radius: 2rem;
+    border: 0;
+    margin-left: -65px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 40px;
+    width: 65px;
+}
+
+
+#roomid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    height: 30px;
+    background-color: var(--myblue);
+    color: white;
+    border-radius: 0.25rem;
+    margin-left: 25px;
+}
+
+#step1 {
+    position: relative;
+}
+
+#step2 {
+
+    position: relative;
+    left: -100%;
+
+}
+#add_more {
+    color: var(--myteal);
+    font-size: 20px;
+}
+
+#add_more:hover {
+    cursor: pointer;
+}
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: var(--myblue);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(24px);
+  -ms-transform: translateX(22px);
+  transform: translateX(22px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.chart-title {
+    margin-top: 20px;
+}
+
+.userchoice {
+    display: block;
+    font-size: 20px;
+    background-color: var(--myblue);
+    color: white;
+/*    min-height: 40px; */
+    border-radius: 1rem !important;
+    width: 100%;
+    transition: 0.3s;
+    transition: background-color 0.3s;
+
+}
+
+.userchoice:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.userchoice.notclicked {
+    opacity: 0.5;
+}
+.userchoice.clicked {
+    background-color: var(--myteal);
+}
+.userchoice.clicked:hover {
+    opacity: 1;
+}
+
+.userchoice label {
+    cursor: pointer;
+}
+
+.btn.userchoice {
+    white-space: normal;
+}
+
+.inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: -webkit-center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.center {
+    width: 53vw;
+    min-width: 500px;
+}
+
+.right {
+    width: 19vw;
+}
+
+.center, .right {
+  background-color: transparent;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  height: 77vh;
+  display: inline-block;
+  /*overflow-y: scroll;*/
+
+}
+
+.center-front, .center-back, .right-front, .right-back {
+  position: absolute;
+  background-color: #f5f5f5;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.rotated.center-back, .rotated.right-back {
+    transform: rotateY(180deg);
+}
+.click-disabled {
+    opacity: 0.4;
+    -webkit-backface-visibility: hidden;
+	-webkit-transform: scale(1);
+}
+
+a, a:hover {
+  color:inherit;
+  text-decoration: none;
+ }
+
+.tabs {
+    max-width: 500px;
+    height: 70px;
+    border-radius: 1rem;
+    background-color: white;
+    margin-top: 20px;
+}
+
+.icon-mc {
+    margin: 5px;
+    margin-bottom: 10px;
+    width: 20px;
+    height: 14px;
+    fill: #5D5855;
+}
+
+.icon-yn {
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 45px;
+    height: 20px;
+    fill: #5D5855;
+}
+
+.pointer:hover {
+    cursor: pointer;
+}
+
+.polltype {
+    /*transition: background-color 0.2s linear;*/
+}
+
+.polltype.selected {
+    background-color: var(--myblue);
+}
+.polltype.selected > *{
+    fill: white;
+    color: white;
+}
+
+.polltype:hover > * {
+    fill: var(--myblue);
+    color: var(--myblue);
+}
+
+.polltype.selected:hover > *{
+    fill: white;
+    color: white;
+}
+
+.poll-type-form {
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    border-radius: 0.5rem;
+    text-align: left;
+    margin-top: 20px;
+
+}
+
+#leftside {
+    background-color: #f5f5f5;
+    height: 80%;
+    width: 50vw;
+    text-align: left;
+    display: inline-block;
+    overflow: scroll;
+}
+
+#votebutton.clicked:hover {
+    opacity: 0.65;
+}
+
+#id_start {
+    width: 100px;
+    border-radius: 0.7rem;
+    background-color: var(--mydarkgrey);
+    display: inline-block;
+}
+
+#id_end {
+    width: 100px;
+    border-radius: 0.7rem;
+    background-color: var(--mydarkgrey);
+    display: inline-block;
+}
+
+#add_container {
+    display: inline-block;
+    margin-left: -20px;
+}
+
+#ynslider {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    border-radius: 27px;
+    width: 280px;
+    height: 65px;
+    text-align: center;
+    margin-left: -140px;
+
+}
+
+
+#ynslider-left{
+    position: absolute;
+    left: 0;
+    border-top-left-radius: 27px;
+    border-bottom-left-radius: 27px;
+    width: 140px;
+    height: 65px;
+    background-color: #FFC78E;
+
+}
+#ynslider-right{
+    position: absolute;
+    right: 0;
+    border-top-right-radius: 27px;
+    border-bottom-right-radius: 27px;
+    width: 140px;
+    height: 65px;
+    background-color: var(--myteal);
+
+}
+
+.container-teal {
+    background-color: var(--myteal);
+    -webkit-transition:background 0.4s;
+    -moz-transition:background 0.4s;
+    -o-transition:background 0.4s;
+    transition:background 0.4s;
+}
+.container-red {
+    background-color: #FFC78E;
+    -webkit-transition:background 0.4s;
+    -moz-transition:background 0.4s;
+    -o-transition:background 0.4s;
+    transition:background 0.4s;
+}
+
+
+#ynslider-button {
+    border-radius: 50%;
+    position: relative;
+    left: 107.5px;
+    top: 0px;
+    background-color: #5f5f5f;
+    z-index: 0;
+    width: 65px;
+    height: 65px;
+    /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+
+}
+
+@media only screen and (max-width: 576px) {
+    .newpoll {
+        width: 80%;
+        min-width: 300px;
+    }
+    .logo {
+        width: 150px;
+    }
+    .btn-group {
+        display: inline-grid;
+    }
+    .choice {
+        width: 200px;
+    }
+
+    .yn.userchoice {
+        display: none;
+    }
+    #ynslider {
+        display: block;
+    }
+    #id_start {
+        width: 80px;
+        margin: 0;
+        border-radius: 0.7rem;
+        background-color: var(--mydarkgrey);
+        display: inline-block;
+    }
+
+    #id_end {
+        width: 80px;
+        margin: 0;
+        border-radius: 0.7rem;
+        background-color: var(--mydarkgrey);
+        display: inline-block;
+    }
+
+    #add_container {
+        margin-left: -10px;
+    }
+
+    #leftside {
+        border-radius: 17px;
+    }
+
+    #logo {
+        width: 80px;
+        position: absolute;
+        left: 50%;
+        top: 5px;
+        margin-left: -50px !important;
+    }
+
+}
+
+@media only screen and (min-width: 576px) {
+    #ynslider {
+        display: none;
+    }
+    #yesno_help {
+        display: none;
+    }
+    #leftside {
+        min-width: 500px;
+    }
+
+}
+@media only screen and (max-width: 576px) {
+
+    #leftside {
+        width: 90%;
+        border-radius: 17px;
+        height: calc(100vh - 84px);
+        margin-top: 14px;
+    }
+}

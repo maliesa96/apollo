@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="18px" viewBox="0 0 26 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>MC icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Admin-new-poll" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-450.000000, -344.000000)" fill="#5D5855">
+            <g id="Nav" transform="translate(375.000000, 328.000000)">
+                <g id="Group-7" transform="translate(45.000000, 16.000000)">
+                    <g id="MC-icon" transform="translate(30.128552, 0.000000)">
+                        <ellipse id="Oval" cx="1.77226779" cy="2" rx="1.77226779" ry="2"></ellipse>
+                        <rect id="Rectangle-4" x="6.20293725" y="1" width="19.4949456" height="3"></rect>
+                        <ellipse id="Oval" cx="1.77226779" cy="9" rx="1.77226779" ry="2"></ellipse>
+                        <rect id="Rectangle-4" x="6.20293725" y="8" width="19.4949456" height="3"></rect>
+                        <ellipse id="Oval" cx="1.77226779" cy="16" rx="1.77226779" ry="2"></ellipse>
+                        <rect id="Rectangle-4" x="6.20293725" y="15" width="19.4949456" height="3"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

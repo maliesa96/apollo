@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="187px" height="125px" viewBox="0 0 187 125" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>Numbered</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Step-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-840.000000, -507.000000)">
+            <g id="Numbered" transform="translate(840.000000, 507.000000)">
+                <rect id="Rectangle-4-Copy" fill="#F5F5F5" x="0" y="0" width="187" height="125" rx="17"></rect>
+                <text id="7.5/10" font-family="GTWalsheimRegular, GT Walsheim" font-size="48" font-weight="normal">
+                    <tspan x="33" y="78" fill="#0D849F">7.5</tspan>
+                    <tspan x="89.4" y="78" fill="#605B5B">/10</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

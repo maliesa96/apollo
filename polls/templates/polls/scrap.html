@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+                          {% for option in legend_data.0 %}
+                            <div class="d-flex align-items-center series">
+                                <span class="marker m-4" style="display: inline-block; width: 12px; height: 12px; background-color: #1FC8A4; border-radius: 50%"></span>
+                                <p style="text-align: left; margin: 0;">
+                                    <span data-name="label-{{forloop.counter0}}">{{option.0}}:&nbsp;</span>
+                                    <span data-name="count-{{forloop.counter0}}">{{option.1}} votes&nbsp;</span>
+                                    <span class="percent" data-name="percent-{{forloop.counter0}}">({{option.2}}%)</span>
+                                </p>
+                            </div>
+                            {% endfor %}
+
+</body>
+</html>

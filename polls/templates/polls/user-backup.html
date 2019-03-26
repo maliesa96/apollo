@@ -1,0 +1,488 @@
+<html lang="en">
+<title>Apollo</title>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    {% load static %}
+
+
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="{% static 'polls/css/apollo.css' %}">
+
+
+    <script src="{% static 'polls/js/Chart.min.js' %}"></script>
+    <script src="{% static 'polls/js/velocity.min.js' %} "></script>
+
+
+
+</head>
+
+<header>
+
+<nav class="navbar navbar-light navbar-expand-md">
+    <a class="navar-brand" href="#">
+        <img src="{% static 'polls/images/Apollo.png' %}" class="m-3" width="150px">
+    </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-4 mr-auto">
+      <li class="nav-item mx-3">
+        <a class="nav-link active" href="#">Polls <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item mx-3">
+        <a class="nav-link" href="#">History</a>
+      </li>
+    </ul>
+    <span class="navbar-nav">
+        <a class="nav-link" href="#">Login</a>
+        <span id="roomid">Room: #{{roomid}} </span>
+    </span>
+  </div>
+</nav>
+
+
+</header>
+
+<body style="text-align: center">
+    <div class="col-md-5 col-10 p-sm-5 px-3 pt-5 mx-4" style="background-color: #f5f5f5; height: 80%; text-align: left; display: inline-block; overflow: scroll;">
+        <div id="leftside">
+            {% if name == '' %}
+            <div class="p-3" id="auth">
+                <h4 style="text-align: -webkit-center">Enter your name</h4>
+
+                <div class="my-5">
+                    <i class="fas fa-lock" style="font-size: 40px; margin-top: 3px; float: left; color: #eacc26;"></i>
+                    <p class="text-muted" style="margin-left: 70px;"> Anonymity is turned on. Your name will not be visible to others.</p>
+                </div>
+
+                <form>
+                    <input type="text" class="form-control" id="name_field" placeholder="Full Name" style="background-color: var(--mydarkgrey); width: 100%; height: 40px; border-radius: 0.7rem;">
+                    <button type="button" id="name_submit" class="btn primary mt-3" style="border-radius: 1rem; width: 100%">Submit</button>
+                </form>
+
+            </div>
+            {% endif %}
+
+            <div id="polldata" class="{% if name == '' %}hidden{% endif %}">
+                <h4 id="polltitle" class="mb-5">{{poll.title}} {% if poll == None %}No polls yet.{% endif %}</h4>
+                <h4 id="no_polls" class="muted {% if poll != None %} hidden {% endif %}">
+                    Polls will appear here when they are created.
+                </h4>
+
+
+
+                <div id=yesnodiv class="btn-group-vertical btn-group-toggle" data-toggle="buttons" style="position: relative; width:100%">
+
+                    {% if poll.type == 'yn' %}
+                    <label class="btn userchoice mb-3 {% if hasVoted == True %} {% if vote.vote == userform.choice.field.choices.0.0 %} clicked{% else %} notclicked{% endif %}{% endif %}" {% if hasVoted == True %} disabled="disabled" {% endif %}>
+                          <span>
+                              <input type="radio" name="choice" value="{{userform.choice.field.choices.0.0}}">{{userform.choice.field.choices.0.1}}
+                          </span>
+                      </label>
+                      <label class="btn userchoice {% if hasVoted == True %} {% if vote.vote == userform.choice.field.choices.1.0 %} clicked {% else %} notclicked{% endif %}{% endif %}" {% if hasVoted == True %} disabled="disabled" {% endif %}>
+                          <span>
+                              <input type="radio" name="choice" value="{{userform.choice.field.choices.1.0}}">{{userform.choice.field.choices.1.1}}
+                          </span>
+                      </label>
+                    {% endif %}
+
+                    <label class="btn mb-3 yesno userchoice hidden ">
+                          <span>
+                              <input type="radio" name="choice" value="TEXT">TEXT
+                          </span>
+                      </label>
+
+                    <div id="ynslider">
+                        <span id="ynslider-left"></span>
+                        <span id="ynslider-right"></span>
+                        <div id="ynslider-button"></div>
+                    </div>
+
+
+                </div>
+
+
+                <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons" id="mcdiv" style="position: relative; width:100%;">
+
+                {% if poll.type == 'mc' %}
+                {% for choice in userform.choice.field.choices %}
+
+                      <label class="btn userchoice mc mb-3 {% if hasVoted == True %} {% if vote.vote|stringformat:"s" == choice.1 %} clicked{% else %} notclicked{% endif %}{% endif %}" {% if hasVoted == True %} disabled="disabled" {% endif %} style=" text-align: left; padding-left: 2.7em; text-indent: -2.1em">
+
+                          <span>
+                              <input type="radio" name="choice" value="{{choice.1}}"><pre style="color: white; display: inline;">{{choice.0}}.  </pre>{{choice.1}}
+                          </span>
+                      </label>
+
+                {% endfor %}
+                {% endif %}
+
+                    <label class="btn userchoice mc mb-3 hidden" style=" text-align: left; padding-left: 2.7em; text-indent: -2.1em">
+
+                      <span>
+                          <input type="radio" name="choice" value="TEXT"><pre style="color: white; display: inline;">LETTER.  </pre>TEXT
+                      </span>
+                    </label>
+
+                </div>
+
+                <div id="numbereddiv" class="{% if poll.type != 'n' %} hidden {% endif %}" style="position: absolute; bottom: 20px; left: 0; width: 100%">
+
+                    <h4 class="muted mb-5" id="numbered_help" style="text-align: center">
+                    Enter a vote from {{userform.start}} to {{userform.end}}
+                    </h4>
+
+                    <input type="number" id="numbered_vote_field" class="form-control mx-auto" {% if hasVoted == True %} disabled="disabled" {% endif %}style="width: 90%; max-width: 300px; height: 45px; border-radius: 0.7rem; margin-left: 0; background-color: var(--mydarkgrey)">
+                    <div tyle="text-align: center;">
+                        <button id="votebutton" type="button" class="btn text-white my-4 mx-auto userchoice {% if hasVoted == True %}clicked {% endif %}" {% if hasVoted == True %} disabled="disabled" {% endif %} style="border-radius: 1.3rem; height: 45px; width: 90%; max-width: 300px;">{% if hasVoted == True %}Submitted {% else %}Vote{% endif %}</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="col-md-5 col-10 p-sm-5 px-3 pt-5 mx-4" style="background-color: #f5f5f5; height: 80%; overflow: scroll; display: inline-block;"></div>
+
+<script>
+
+    var roomid = {{roomid_json}}
+    var i;
+    var socket;
+    var name;
+    var choicehtml;
+    var polltype;
+    var start;
+    var end;
+
+    $(document).ready(function(){
+
+        name = {{name_json}}
+
+        ynhtml = $(".yesno.userchoice.hidden").prop('outerHTML').replace('hidden','')
+
+        choicehtml = $(".mc.userchoice.hidden").prop('outerHTML').replace('hidden','')
+        $(".userchoice.hidden").remove()    //so we don't mess up our iterations with a dummy elements
+
+        if (name != ''){
+            opensocket()
+        }
+
+        $("#name_submit").click(function(event){
+            event.preventDefault()
+            name = $("#name_field").val()
+            if (name != '') {
+                opensocket()
+                $("#auth").remove()
+                $("#polldata").removeClass("hidden")
+
+            }
+
+        });
+
+        $("#name_field").keydown(function(event) {
+              if (event.keyCode === 13) {
+                event.preventDefault();
+                $("#name_submit").click();
+              }
+        });
+
+        var container = $('#ynslider')
+        var sliderbutton = $("#ynslider-button")
+        var sliderleft = $("#ynslider-left")
+        var sliderright = $("#ynslider-right")
+
+
+        var containerwidth = container.width()
+        var sliderwidth = sliderbutton.width()
+        center = containerwidth/2 - sliderwidth/2
+
+            sliderbutton.draggable(
+            {
+                axis: 'x',
+                containment: '#ynslider',
+                drag: function(event, ui) {
+
+                    sliderleft.removeClass('container-red')
+                    sliderright.removeClass('container-teal')
+
+
+                    sliderleft.width(ui.position.left+sliderwidth/2)
+                    sliderright.width(containerwidth-(ui.position.left+sliderwidth/2))
+
+                    if (ui.position.left > 2 && ui.position.left < center)
+                    {
+                        var weight = ui.position.left/center
+                        //slider is on the left
+                        var newcolor = pickHex([31, 200, 164],[255, 199, 142],weight)
+                        sliderright.css('background-color', 'rgb('+newcolor[0]+','+newcolor[1]+','+newcolor[2]+')')
+                    }
+                    else if (ui.position.left > center && (ui.position.left < (containerwidth - sliderwidth -2))) {
+                        var weight = 1-(ui.position.left-containerwidth/2+sliderwidth/2)/(containerwidth/2)
+                        var newcolor = pickHex([255, 199, 142],[31, 200, 164],weight)
+                        sliderleft.css('background-color', 'rgb('+newcolor[0]+','+newcolor[1]+','+newcolor[2]+')')
+                    }
+
+                    else if (ui.position.left <= 2){
+                        sliderright.css("background-color","#FFC78E")
+                    }
+                    else if (ui.position.left >= (containerwidth - sliderwidth -2)){
+                        sliderleft.css("background-color","var(--myteal)")
+                    }
+
+
+                },
+                stop: function(event, ui) {
+                    if (ui.position.left >= (containerwidth - sliderwidth -2))  {
+                        // its at the right end
+                        socket.send(JSON.stringify({
+                            'vote': "Yes"
+                        }));
+                        $(this).draggable('disable')
+                    }
+                    else if (ui.position.left <= 2)  {
+                        // its at the left end
+
+                        socket.send(JSON.stringify({
+                            'vote': "No"
+                        }));
+                        $(this).draggable('disable')
+                    }
+                    else {
+                    // its not at the end
+
+                        $(this).velocity({
+                            left: center,
+                        })
+                        sliderleft.velocity({
+                            width: 140,
+
+                        })
+                        sliderright.velocity({
+                            width: 140,
+                        })
+
+                        if (ui.position.left > 0 && ui.position.left < center)
+                        {
+
+                            sliderright.addClass('container-teal').css("background-color","")
+                            sliderleft.css("background-color","#FFC78E")
+                            setTimeout(function(){sliderright.removeClass('container-teal')},400) //remove when animation is complete
+                        }
+                        else if (ui.position.left > center) {
+
+                            sliderleft.addClass('container-red').css("background-color","")
+                            sliderright.css("background-color","var(--myteal)")
+
+                            setTimeout(function(){sliderleft.removeClass('container-red')},400)
+                        }
+
+
+                    }
+                }
+            })
+
+
+
+});
+
+function pickHex(color1, color2, weight) {
+    var w1 = weight;
+    var w2 = 1 - w1;
+    var rgb = [Math.round(color1[0] * w1 + color2[0] * w2),
+        Math.round(color1[1] * w1 + color2[1] * w2),
+        Math.round(color1[2] * w1 + color2[2] * w2)];
+    return rgb;
+}
+
+function opensocket() {
+
+        socket = new WebSocket('ws://' + window.location.host +'/ws/' + roomid + '/');
+
+        socket.onopen = function() {
+            var message = {
+                'name': name,
+            }
+
+            socket.send(JSON.stringify(message));
+        }
+
+
+
+       socket.onmessage = function(e) {
+
+            var data = JSON.parse(e.data);
+
+            if('vote' in data) {
+
+                var vote = data['vote'];
+                console.log("voted: " + vote)
+            }
+
+            else if('conf' in data) {
+
+                var vote = data['conf']
+
+                if (polltype === 'mc' || polltype === 'yn')
+                {
+                    var chosen = $(".active") //
+
+                    chosen.addClass("clicked").attr('disabled','true')
+
+                    var notchosen = $(".userchoice").not(".clicked").addClass("notclicked").attr('disabled','true')
+
+                }
+
+                else if (polltype === 'n')
+                {
+                    $("#votebutton").addClass("clicked").text("Submitted").attr('disabled','true')
+                    $("#numbered_vote_field").attr('disabled','true')
+                }
+            }
+
+            else if ('newpoll' in data) {
+
+                $("#no_polls").addClass("hidden")
+                $("#mcdiv,#yesnodiv").empty() //not emptying numbered div because we hide it
+
+                title = data['title']
+                type = data['type']
+                options = data['options']
+
+                polltype = type; //update polltype
+
+                $("#polltitle").text(title)
+
+                if (type === 'mc'){
+
+
+                    var alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'] // 10 choices max
+
+                    $("#numbereddiv").addClass("hidden")
+
+                    for (i=0; i < options.length; i++){
+                        var newchoice = choicehtml.replace('LETTER', alpha[i]).replace(/\TEXT/g,options[i])
+                        $("#mcdiv").append(newchoice)
+                    }
+
+                }
+
+                else if (type === 'yn'){
+
+                $("#numbereddiv").addClass("hidden")
+
+
+                    yn = ['Yes', 'No']
+
+                    for (i=0; i < yn.length; i++){
+                        var newchoice = ynhtml.replace(/\TEXT/g,yn[i])
+                        $("#yesnodiv").append(newchoice)
+                    }
+
+                }
+
+                else if (type === 'n'){
+                    start = options[0]
+                    end = options[1]
+
+                    $("#numbered_help").text('Enter a vote from '+start+' to '+end)
+                    $("#numbered_vote_field").val('').removeAttr("disabled")
+                    $("#votebutton").removeClass("clicked").removeAttr("disabled").text("Vote")
+                    $("#numbereddiv").removeClass("hidden")
+
+                }
+
+
+            }
+
+            else if ('close' in data){
+                $("#numbereddiv").addClass("hidden")
+                $("#no_polls").removeClass("hidden")
+                $("#mcdiv,#yesnodiv").empty()
+                $("#polltitle").text("No polls yet.")
+
+            }
+        };
+
+        socket.onclose = function(e) {
+            console.error('Socket closed unexpectedly');
+            console.log(e);
+        };
+
+}
+
+
+
+
+</script>
+
+<script>
+    {% if poll.type != None %}
+
+    polltype = {{polltype}}
+
+    {% if poll.type == 'n' %}
+        start = {{userform.start}}
+        end = {{userform.end}}
+    {% endif %}
+
+    {% else %}
+
+    polltype = null
+
+    {% endif %}
+
+
+    $("#polldata").on('click', '.userchoice', function(){
+
+        if ($(this).attr("disabled") != "disabled"){
+            if (polltype === 'n') {
+                var vote = parseFloat($("#numbered_vote_field").val())
+                if (vote < start || vote > end){
+                    console.log('Input out of range')
+                    return;
+                }
+            }
+
+            else if (polltype === 'mc' || polltype === 'yn'){
+                var vote = $(this).find("input").attr('value');
+            }
+
+            socket.send(JSON.stringify({
+                'vote': vote
+            }));
+            }
+    });
+
+
+</script>
+
+<script>
+
+
+
+</script>
+</body>
+
+<!-- declare javascript vars-->
+
+
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Home</title>
+
+    {% load static %}
+
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl" crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="{% static 'polls/css/apollo.css' %}">
+
+</head>
+<body>
+    <div class="d-flex justify-content-center align-items-center flex-wrap" id="top" style="width: 100vw; height: 100vh; flex-direction: column; overflow-y: scroll;">
+        <img class="logo" src="{% static 'polls/images/Apollo.png' %}" width="300px">
+        <form method='post' style="width:100%" novalidate>
+            {% csrf_token %}
+            <div class="d-flex justify-content-center mt-5" style="margin-bottom: 70px;">
+                {{newpoll.title}}
+                <button id="gobutton" type="button" style=" "> Go </button>
+            </div>
+
+            <div class="d-flex justify-content-center mx-3 hidden" id="step2">
+                <div id="form_set" style="background-color: #f2f2f2; width: 100%; max-width: 500px; position: relative; border-radius: 0.5rem; padding: 10px;">
+                    <div class="mt-2 mx-3" style="position: relative; text-align: left;">
+                    <div class="row">
+                     <div class="col-sm-2 col-4">
+                         Private:
+                     </div>
+                        <div class="col-sm-2 col-6">
+                        <label class="switch ml-3 mr-5">
+                            {{newpoll.private}}
+                          <span class="slider round"></span>
+                        </label>
+                        </div>
+                        <div class="col-sm-1"></div>
+
+                      <div class="col-sm-3 col-4">
+                        Anonymous:
+                      </div>
+                       <div class="col-sm-2 col-6">
+                        <label class="switch ml-3 mx-3">
+                            {{newpoll.anonymous}}
+                          <span class="slider round"></span>
+                        </label>
+                       </div>
+                    </div>
+                    </div>
+
+                    <div id="numbered_form">
+                        <div class="my-3 mx-3" style="display: inline-block"><p>Range:</p></div>
+                            {{numbered.start}}
+                            {{numbered.end}}
+
+
+                    </div>
+                    <div id="mc_form">
+                        <div class="my-3 mx-3" ><p>Enter choices for users to vote on:</p></div>
+
+                        {{ choiceset.management_form }}
+
+                        <div class="option empty_form" id="empty_form" style="display: none;">
+                            {{choiceset.empty_form.choice}}
+                        </div>
+                        <div class="option mt-1" id="add_form" style="display: inline-block; width: 95%">
+                            {{choiceset.0}}
+                        </div>
+
+                        <div id="add_container">
+                            <i id="add_more" class="fas fa-plus-circle"></i>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn text-white my-3" style="background-color: var(--myblue);border-radius: 1rem; width: 150px; position: absolute; left: 50%; top: 100%; margin-left: 10px;">Start Poll</button>
+                    <button type="button" class="btn my-3" id="back" style="color: var(--myblue); border-style: solid; background-color: white; border-color: var(--myblue); border-radius: 1rem; width: 150px; position: absolute; top: 100%; left: 50%; margin-left: -160px;">Back</button>
+
+
+                    <h5 style="position: absolute; top: -35px; left: 15px;">Options: </h5>
+
+                </div>
+
+
+            </div>
+
+            <div class="d-flex justify-content-center hidden" id="step1">
+                <div class="btn-group btn-group-toggle mt-4" data-toggle="buttons" style="position: relative;">
+                  <label class="btn choice-label">
+                    <img  class="mb-3 zoom choice" src="{% static 'polls/images/MultipleChoice.svg' %}" style="border-radius: 17px;">
+                      <div>
+                          {{newpoll.type.0}}
+                      </div>
+                  </label>
+                  <label class="btn choice-label">
+                    <img  class="mb-3 zoom choice" src="{% static 'polls/images/YesNo.svg' %}" style="border-radius: 17px;">
+                      <div>
+                          {{newpoll.type.1}}
+                      </div>
+                  </label>
+                  <label class="btn choice-label">
+                    <img  class="mb-3 zoom choice" src="{% static 'polls/images/Numbered.svg' %}" style="border-radius: 17px;">
+                      <div>
+                          {{newpoll.type.2}}
+                      </div>
+                  </label>
+                  <h5 style="position: absolute; top: -35px; left: 15px;">Select Poll Type: </h5>
+
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+<script>
+$(document).ready(function(){
+
+
+    $("#id_title").keydown(function(event) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        $("#gobutton").click();
+      }
+    });
+
+
+    $("#gobutton").click(function(){
+        if ($("#id_title").val()[0] === "#") {
+            var id = $("#id_title").val().split("#")[1]
+            window.location = "/"+id //redirect to room
+        }
+        else {
+            $("#step1").removeClass("hidden").hide().fadeIn(300);
+            $(this).addClass("hidden")
+            $(this).attr("disabled", "disabled")
+        }
+    });
+
+    $(".choice-label").click(function(){
+
+        var type = $(this).find("input").attr('value')
+
+        if (type === 'mc'){         //hide unrelated forms
+            $("#numbered_form").hide()
+            $('#mc_form').show()
+        }
+        else if (type === 'n'){
+            $("#mc_form").hide()
+            $("#numbered_form").show()
+        }
+        else if (type === 'yn'){
+            $("#mc_form").hide()
+            $("#numbered_form").hide()
+        }
+
+        $("#step1").animate({
+            left: '100%'},
+            300, function(){
+                $("#step1").addClass("hidden")
+                $("#step2").removeClass("hidden")
+                $("#step2").animate({
+                    left: '0'}, 300);
+                });
+        });
+
+
+    });
+
+    $("#back").click(function(){
+        $("#step2").animate({
+            left: '-100%'},300,function(){
+                $("#step2").addClass("hidden")
+                $("#step1").removeClass("hidden")
+                $("#step1").animate({
+                    left: '0'}, 300);
+            });
+
+
+
+    });
+</script>
+
+<script>
+var field;
+    $(document).ready(function() {
+        field = $('#empty_form').html()
+
+        var alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'] // 10 choices max
+
+        $('#add_more').click(function() {
+            var form_idx = $('#id_form-TOTAL_FORMS').val();
+            $('#add_form').append(field.replace(/__prefix__/g, form_idx));
+            $('#id_form-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+            $("#id_form-"+String(form_idx)+"-choice").attr('placeholder', alpha[parseInt(form_idx)]+'.')
+
+        });
+
+        $("#id_form-0-choice").attr('placeholder','A.');
+
+        $(".switch").click(function() {
+            var e = $(this).children("input")
+            e.prop("checked", !e.prop("checked"));
+            console.log("triggered");
+        });
+
+
+    });
+
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="187px" height="125px" viewBox="0 0 187 125" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>Multiple Choice</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Step-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-416.000000, -507.000000)">
+            <g id="Multiple-Choice" transform="translate(416.000000, 507.000000)">
+                <rect id="Rectangle-4" fill="#F2F2F2" x="0" y="0" width="187" height="125" rx="17"></rect>
+                <g id="Group-2" transform="translate(15.000000, 18.000000)">
+                    <rect id="Rectangle-3" stroke="#0D849F" stroke-width="3" fill="#F2F2F2" x="1.5" y="1.5" width="155" height="22" rx="11"></rect>
+                    <text id="A." font-family="GTWalsheimRegular, GT Walsheim" font-size="15" font-weight="normal" fill="#605B5B">
+                        <tspan x="14" y="18">A. </tspan>
+                    </text>
+                </g>
+                <g id="Group-2-Copy" transform="translate(15.000000, 83.000000)">
+                    <rect id="Rectangle-3" stroke="#0D849F" stroke-width="3" fill="#F2F2F2" x="1.5" y="1.5" width="155" height="22" rx="11"></rect>
+                    <text id="C." font-family="GTWalsheimRegular, GT Walsheim" font-size="15" font-weight="normal" fill="#605B5B">
+                        <tspan x="14" y="18">C. </tspan>
+                    </text>
+                </g>
+                <g id="Group-2-Copy-2" transform="translate(15.000000, 50.000000)">
+                    <rect id="Rectangle-3" stroke="#0D849F" stroke-width="3" fill="#F2F2F2" x="1.5" y="1.5" width="155" height="22" rx="11"></rect>
+                    <text id="B." font-family="GTWalsheimRegular, GT Walsheim" font-size="15" font-weight="normal" fill="#605B5B">
+                        <tspan x="14" y="18">B.</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
