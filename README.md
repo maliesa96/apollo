@@ -4,7 +4,7 @@ The end goal is to have a reliable, easy to setup web application that can be in
 
 At this time Apollo's functionality is limited to:
 * Starting either a multiple choice, binary (yes/no), or numeric poll
-* viewing responses in real-time in a bar graph or pie chart
+* viewing real-time responses in a bar graph/pie chart
 * exporting and downloading the results in CSV format
 
 TODO:
