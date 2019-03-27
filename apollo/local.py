@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [ #AWS domain removed for privacy reasons
                  '127.0.0.1',
+                 '192.168.1.20',
                  'localhost']
 
 

@@ -25,8 +25,7 @@ SECRET_KEY = '8m-@up!55u=^!#400$qjqsliic8nxoc@#)1x18ldv1e_2m#90c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['apollo.us-east-1.elasticbeanstalk.com',
-                 '172.31.31.6',
+ALLOWED_HOSTS = [#AWS domain removed for privacy reasons
                  '127.0.0.1',
                  'localhost']
 
