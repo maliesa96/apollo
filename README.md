@@ -13,6 +13,7 @@ At this time Apollo's functionality is limited to:
 ## Usage
 
 Make sure you have redis installed via docker, then run:
+
 `docker run -p 6379:6379 -d redis:2.8`
 
 This starts the redis server. We then use daphne to listen for both HTTP and Websocket requests on 0.0.0.0:8001.
