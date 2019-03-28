@@ -10,6 +10,17 @@ At this time Apollo's functionality is limited to:
 * viewing real-time responses in a bar graph/pie chart
 * exporting and downloading the results in CSV format
 
+## Usage
+
+Make sure you have redis installed via docker, then run:
+`docker run -p 6379:6379 -d redis:2.8`
+
+This starts the redis server. We then use daphne to listen for both HTTP and Websocket requests on 0.0.0.0:8001.
+
+`daphne -p 8001 -b 0.0.0.0 apollo.asgi:application`
+
+
+
 TODO:
 * Add login functionality
 * implement the private and anonymous poll options
