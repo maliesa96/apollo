@@ -12,6 +12,13 @@ At this time Apollo's functionality is limited to:
 
 ## Usage
 
+If you want devices on the network to be able to access Apollo, you'll have to make sure your server's LAN IP address is added to ALLOWED_HOSTS FOR Django to allow connections to it. In your settings.py file:
+
+`ALLOWED_HOSTS = [
+  "192.168.1.10", //Repalce with your IP address
+  "127.0.0.1"
+]`
+
 Make sure you have redis installed via docker, then run:
 
 `docker run -p 6379:6379 -d redis:2.8`
@@ -20,7 +27,9 @@ This starts the redis server. We then use daphne to listen for both HTTP and Web
 
 `daphne -p 8001 -b 0.0.0.0 apollo.asgi:application`
 
+Thats all there is to it. You can now create a poll by navigating to your server's IP address. In the above example, entering `http://192.168.1.10:8001` in the browser would take you to Apollo's home page. From here, you can enter your poll's title and options, and Apollo will automatically generate a room ID, shown in the top right corner of the admin page. Users can join this room and vote by entering in the URL manually (ex. `http://192.168.1.10:8001/xyz123`) or by going the home page and typing `#xyz123` in the input field.
 
+Note that the admin page can only be accessed from the same browser session for now. In the future, the admin page will be linked to the poll creator's account.
 
 TODO:
 * Add login functionality
