@@ -29,7 +29,7 @@ This starts the redis server. We then use daphne to listen for both HTTP and Web
 
 `daphne -p 8001 -b 0.0.0.0 apollo.asgi:application`
 
-Thats all there is to it. You can now create a poll by navigating to your server's IP address. In the above example, entering `http://192.168.1.10:8001` in the browser would take you to Apollo's home page. From here, you can enter your poll's title and options, and Apollo will automatically generate a room ID, shown in the top right corner of the admin page. Users can join this room and vote by entering in the URL manually (ex. `http://192.168.1.10:8001/xyz123`) or by going the home page and typing `#xyz123` in the input field.
+Thats all there is to it. You can now create a poll by navigating to your server's IP address. In the above example, entering `http://192.168.1.10:8001` in the browser would take you to Apollo's home page. From here, you can enter your poll's title and options, and Apollo will automatically generate a room ID, shown in the top right corner of the admin page. Users can join this room and vote by entering in the URL manually (ex. `http://192.168.1.10:8001/xyz123`) or by going the home page and typing in the room ID with a hashtag (ex. `#xyz123`) in the input field.
 
 Note that the admin page can only be accessed from the same browser session for now. In the future, the admin page will be linked to the poll creator's account.
 
