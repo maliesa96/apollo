@@ -15,8 +15,11 @@ At this time Apollo's functionality is limited to:
 If you want devices on the network to be able to access Apollo, you'll have to make sure your server's LAN IP address is added to ALLOWED_HOSTS FOR Django to allow connections to it. In your settings.py file:
 
 `ALLOWED_HOSTS = [
-  "192.168.1.10", //Repalce with your IP address
+
+  "192.168.1.10", //Replace with your IP address
+  
   "127.0.0.1"
+  
 ]`
 
 Make sure you have redis installed via docker, then run:
