@@ -18,6 +18,7 @@ If you want devices on the network to be able to access Apollo, you'll have to m
 ALLOWED_HOSTS = [
   "192.168.1.10", //Replace with your IP address
   "127.0.0.1",
+  "0.0.0.0"
 ]
 ```
 
