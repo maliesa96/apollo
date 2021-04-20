@@ -2,7 +2,7 @@ aioredis==1.2.0
 asgiref==2.3.2
 async-timeout==2.0.1
 attrs==18.2.0
-autobahn==18.9.2
+autobahn==20.12.3
 Automat==0.7.0
 channels==2.1.4
 channels-redis==2.3.1
